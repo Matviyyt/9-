@@ -61,6 +61,9 @@ ADVICE = {
 # Функція для початку розмови
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Початок розмови та виведення кнопок 'Так' і 'Ні'."""
+    # Очищення даних користувача для нової сесії
+    context.user_data.clear()
+    
     reply_keyboard = [["Так", "Ні"]]
     markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
@@ -323,13 +326,11 @@ async def end(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await update.message.reply_text("Будь ласка, виберіть опцію з клавіатури.")
         return END
 
-# Обробник невідомих команд
-async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Вибачте, я не розумію цю команду.")
-
-# Обробник помилок
-async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    print(f"Update {update} caused error {context.error}")
+# Обробник команди /cancel
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Обробник команди для скасування розмови."""
+    await update.message.reply_text("Розмову скасовано. Введіть /start, щоб почати знову.", reply_markup=ReplyKeyboardRemove())
+    return ConversationHandler.END
 
 # Основна функція
 def main() -> None:
@@ -353,17 +354,14 @@ def main() -> None:
             MATH: [MessageHandler(filters.TEXT & ~filters.COMMAND, math_problems)],  # Математичні завдання
             END: [MessageHandler(filters.TEXT & ~filters.COMMAND, end)]  # Завершення розмови
         },
-        fallbacks=[CommandHandler("cancel", end)],  # Обробник команди /cancel для завершення розмови
+        fallbacks=[
+            CommandHandler("start", start),  # Додаємо команду /start як fallback
+            CommandHandler("cancel", cancel)  # Обробник команди /cancel для завершення розмови
+        ],
     )
 
     # Додавання обробника розмов
     application.add_handler(conv_handler)
-
-    # Додавання обробника невідомих команд
-    application.add_handler(MessageHandler(filters.COMMAND, unknown))
-
-    # Додавання обробника помилок
-    application.add_error_handler(error)
 
     # Запуск бота
     print("Бот запущений!")
