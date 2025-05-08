@@ -207,7 +207,8 @@ async def pulse_2min(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             f"Індекс Руф'є: {ruffier_index:.2f}\n\n"
             f"Результат: {result}\n"
             f"{motivation}\n\n"
-            f"Корисні вправи для твого рівня: [Відео]({fitness_video})"
+            f"Корисні вправи для твого рівня: [Відео]({fitness_video})\n\n"
+            f"Чи потрібен тобі графік твого пульсу?"
         )
 
         # Збереження результату для подальшого використання
