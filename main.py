@@ -183,16 +183,16 @@ async def pulse_2min(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         # Визначення результату на основі індексу Руф'є
         if 0 <= ruffier_index <= 5:
             result = "Чудово"
-            fitness_video = "https://youtu.be/advanced_fitness"  # Замініть на реальне посилання
+            fitness_video = "https://youtu.be/RYJCdDZKPMU?si=A5s8CekrLMCaz-VG"  # Замініть на реальне посилання
         elif 5.1 <= ruffier_index <= 10:
             result = "Добре"
-            fitness_video = "https://youtu.be/good_fitness"  # Замініть на реальне посилання
+            fitness_video = "https://youtu.be/RYJCdDZKPMU?si=A5s8CekrLMCaz-VG"  # Замініть на реальне посилання
         elif 10.1 <= ruffier_index <= 15:
             result = "Задовільно"
-            fitness_video = "https://youtu.be/satisfactory_fitness"  # Замініть на реальне посилання
+            fitness_video = "https://youtu.be/RYJCdDZKPMU?si=A5s8CekrLMCaz-VG"  # Замініть на реальне посилання
         else:
             result = "Погано"
-            fitness_video = "https://youtu.be/basic_fitness"  # Замініть на реальне посилання
+            fitness_video = "https://youtu.be/RYJCdDZKPMU?si=A5s8CekrLMCaz-VG"  # Замініть на реальне посилання
 
         # Вибір випадкової мотиваційної фрази для даного результату
         import random
