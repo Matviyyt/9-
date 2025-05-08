@@ -126,7 +126,7 @@ async def exercise(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Отримання типу вправи."""
     exercise_type = update.message.text
     context.user_data["exercise"] = exercise_type
-    await update.message.reply_text("Введи, будь ласка, свій пульс у такі моменти:\n\nДо вправи:",
+    await update.message.reply_text("Введи, будь ласка, свій пульс у такі моменти:\n За 15 секунд вправи \nДо вправи:",
                                     reply_markup=ReplyKeyboardRemove())
     return PULSE_BEFORE  # Перехід у стан PULSE_BEFORE
 
