@@ -1,10 +1,17 @@
 from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, filters, ContextTypes
 import matplotlib.pyplot as plt
+import logging
 import io  # для роботи з байтовим потоком зображення
 
 # Токен вашого бота з Telegram BotFather
 TOKEN = "7626170602:AAG0C4sjxgKoLgkk-cJLBbSqTm8LXeT8RHs"  # Замініть на свій токен
+
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
 # Стани розмови
 START, AGE, GENDER, EXERCISE, PULSE_BEFORE, PULSE_DURING, PULSE_AFTER, PULSE_2MIN, ANALYSIS, MATH, END = range(11)
@@ -364,8 +371,7 @@ def main() -> None:
     application.add_handler(conv_handler)
 
     # Запуск бота
-    print("Бот запущений!")
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    application.run_polling()  # Видалено параметр allowed_updates
 
 if __name__ == "__main__":
     main()
